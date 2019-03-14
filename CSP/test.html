@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'; form-action 'self'; report-uri /report">
+    <title>test</title>
+</head>
+<body>
+    <header>剑三--花间一游</header>
+    <main>
+        <form action="/form" 
+            method="POST"
+            enctype="multipart/form-data">
+            <input type="text" name="name">
+            <input type="password" name="password">
+            <input type="file" name="file">
+            <input type="submit">
+        </form>
+        <img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3590607515,186424472&fm=173&app=25&f=JPEG?w=218&h=146&s=128069A4420130E85A289C560300E0D9" alt="" srcset="">
+        <form action="https://www.baidu.com/">
+            <input type="submit" value="click me">
+        </form>
+    </main>
+    <script>
+        var form = document.getElementsByTagName('Form')
+        console.log(form)
+        form[0].addEventListener('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(form[0])
+            fetch('/form', {
+                method: 'POST',
+                body: formData
+            })
+        })
+    </script>
+    <script src="">
+        console.log('inline-script')
+    </script>
+    <script src="/script"></script>
+</body>
+</html>
