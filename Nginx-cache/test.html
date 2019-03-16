@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+    <header>
+        剑三--花间一游
+        <span id="data"></span>
+    </header>
+    <main>
+        <form action="/form" 
+            method="POST"
+            enctype="multipart/form-data">
+            <input type="text" name="name">
+            <input type="password" name="password">
+            <input type="file" name="file">
+            <input type="submit">
+        </form>
+        <button id="btn">click me</button>
+    </main>
+    <script>
+       var index = 0
+       function doRequest () {
+       document.getElementById('data').innerText = ''
+
+        fetch('/data', {
+            headers: {
+                'X-Test-Cache': index++
+            }
+        }).then((resp) => {
+            return resp.text()
+        }).then(function(text) {
+            document.getElementById('data').innerText = text
+        })
+       }
+       document.getElementById('btn').addEventListener('click', doRequest)
+    </script>
+</body>
+</html>
