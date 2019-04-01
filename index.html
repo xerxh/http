@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #rect {
+            /* position: relative;
+            top: 0; */
+            /* transform: translateY(0); */
+            width: 100px;
+            height: 100px;
+            background: blue;
+                /* opacity: 需要独立图层 否则会触发重绘和回流*/
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    </style>
+</head>
+<body>
+    <main>
+            <!-- translate替代top  top会出发回流 -->
+        <!-- 公司电脑 top   290 + layout(280) + 480 + 150 + 280 = 1480us -->
+        <!-- 公司电脑 translate 300 + layout(没有) + (update layout tree) 320 + paint(140 --教程有 实际没发现) +200 --> 
+            <!-- opacity 代替 visibility  visibility会触发重绘 -->
+        <!-- 公司电脑 visibility   140 + layout(没有) + (update layout tree) 110 + (paint) 110 + (Composite Layers图像重组) 250 = 610us -->
+        <!-- 公司电脑 opacity 260 + layout(没有) + (update layout tree) 350 + (paint) (教程没有 但实际有 可能是浏览器版本原因 80) + 260 --> 
+        <div id = 'rect'>
+
+        </div>
+        <script>
+            setTimeout(() => {
+                    // translate || top
+                // document.getElementById('rect').style.top = '100px'
+                // document.getElementById('rect').style.transform = 'translateY(100px)'
+                    // visibility || opacity
+                // document.getElementById('rect').style.visibility = 'hidden'
+                document.getElementById('rect').style.opacity = '0'
+            }, 2000)
+        </script>
+    </main>
+</body>
+</html>
